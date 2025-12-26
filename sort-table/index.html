@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<body>
+    <table id="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>John</td>
+                <td>Smith</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>Boris</td>
+                <td>Crawford</td>
+                <td>45</td>
+            </tr>
+            <tr>
+                <td>Peterr</td>
+                <td>Brown</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td>Ann</td>
+                <td>Lee</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+<script>
+
+    const rows = document.querySelectorAll('tbody tr');
+    const clonedRows = [];
+
+    for (let row of rows) {
+        clonedRows.push(row.cloneNode(true));
+    }
+
+    const sortedRows = Array.from(clonedRows)
+        .sort((a, b) => a.innerText.localeCompare(b.innerText));
+
+    for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        const sortedRow = sortedRows[i];
+        row.replaceWith(sortedRow);
+    }
+
+</script>

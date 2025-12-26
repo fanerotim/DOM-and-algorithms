@@ -1,0 +1,11 @@
+#Sort the table
+
+Name	Surname	Age
+John	Smith	10
+Pete	Brown	15
+Ann	Lee	5
+...	...	...
+
+There may be more rows in it.
+
+Write the code to sort it by the "name" column.
