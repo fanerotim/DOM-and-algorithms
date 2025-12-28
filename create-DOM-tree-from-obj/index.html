@@ -59,32 +59,38 @@
 
     function createTree(container, data) {
       /* your code */
-
+      // convert obj into arr
       const entries = Object.entries(data);
+      // pass it to dom-builder fn (createDom);
       createDom(container, entries);
     }
 
     function createDom(container, entries) {
       
+      // create a new ul that will wrap the list items
       const ul = document.createElement('ul');
 
+      // iterate over transformed obj key and values
       for (let entry of entries) {
+        // iterate over each key / value as a separate value
         for (let item of entry) {
-
+          // check if the value is obj, so, we can repeat the cycle and loop throgh the objs as deep as needed
           if (typeof item === 'object') {
+            // get last li item and update container as the contaier / hook changes - it needs to be the last li if we already have one
             const lis = document.querySelectorAll('li');
             createDom(lis[lis.length -1], Object.entries(item))
             continue;
           }
 
+          // create a list item, give it text and append to newly created ul
           const li = document.createElement('li');
           li.textContent = item;
-          ul.append(li)
+          ul.append(li);
+          // container changes and it is dynamic
           container.append(ul);
         }
       }
     }
-
 
     createTree(document.getElementById('tree'), data);
   </script>
