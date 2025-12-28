@@ -59,7 +59,32 @@
 
     function createTree(container, data) {
       /* your code */
+
+      const entries = Object.entries(data);
+      createDom(container, entries);
     }
+
+    function createDom(container, entries) {
+      
+      const ul = document.createElement('ul');
+
+      for (let entry of entries) {
+        for (let item of entry) {
+
+          if (typeof item === 'object') {
+            const lis = document.querySelectorAll('li');
+            createDom(lis[lis.length -1], Object.entries(item))
+            continue;
+          }
+
+          const li = document.createElement('li');
+          li.textContent = item;
+          ul.append(li)
+          container.append(ul);
+        }
+      }
+    }
+
 
     createTree(document.getElementById('tree'), data);
   </script>
