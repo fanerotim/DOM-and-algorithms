@@ -7,7 +7,16 @@
 
 <body>
 
-  <h1 class="heading">Create DOM tree from Object</h1>
+  <style>
+    .heading {
+      width: 70%;
+      text-align: center;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+  </style>
+
+  <h1 class="heading">Create a nested ul/li DOM tree from a data obj</h1>
   <div id="tree"></div>
   <!-- The result should be:
 <div id="tree">
@@ -56,9 +65,12 @@
         }
       }
     };
-
+    
     function createTree(container, data) {
       /* your code */
+      // before anything else, let's make the heading blink for fun
+      // setInterval(() => heading.style.color === 'white' ? heading.style.color = 'black' : heading.style.color = 'white', 1000);
+      const heading = document.querySelector('.heading');
       // convert obj into arr
       const entries = Object.entries(data);
       // pass it to dom-builder fn (createDom);
