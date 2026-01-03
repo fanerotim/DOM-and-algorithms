@@ -11,18 +11,30 @@
 
   <div id="text">Text</div>
 
+  <!-- This is a different challenge from the same source. This time hide the whole button -->
+  <input type="button" id="hideMe" value="Click me and I will hide">
+
   <script>
     // your code here
 
     // create a handler fn
     function handler() {
-        // hide text when user clicks on button
-        text.style.display = 'none';
+      // hide text when user clicks on button
+      text.style.display = 'none';
     }
 
     // attach click event listener to button
-    hider.addEventListener('click', handler)
+    hider.addEventListener('click', handler);
+
+    // this is solution to second exercise - hide button on click (instead of text);
+    function hideButton() {
+      this.hidden = true;
+    }
+
+    hideMe.addEventListener('click', hideButton);
+
   </script>
 
 </body>
+
 </html>
