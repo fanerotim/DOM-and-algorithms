@@ -12,6 +12,7 @@
       overflow: hidden;
       cursor: pointer;
       position: relative;
+      transition: top .5s, left .5s;
     }
 
     #ball {
@@ -31,6 +32,25 @@
     <img src="https://en.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
   </div>
+
+  <script>
+
+    function handler(e) {
+        const x = e.offsetX;
+        const y = e.offsetY;
+
+        const fieldWidth = this.offsetWidth;
+        const fieldHeight = this.offsetHeight;
+
+        const ballOffsetX = ball.clientWidth / 2;
+        const ballOffsetY = ball.clientHeight / 2;
+
+        ball.style.left = `${x - ballOffsetX}px`;
+        ball.style.top = `${y - ballOffsetY}px`;
+    }   
+
+    field.addEventListener('click', handler);
+  </script>
 
 </body>
 </html>
