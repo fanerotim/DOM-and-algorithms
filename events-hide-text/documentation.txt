@@ -1,0 +1,4 @@
+Hide on click
+Add JavaScript to the button to make <div id="text"> disappear when we click it.
+
+Exercise is part of the Events chapter of javascript.info website: https://javascript.info/introduction-browser-events
