@@ -16,10 +16,10 @@
     }
 
     #ball {
-        left: 0;
-        top: 0;
-        position: absolute;
-        transition: top .5s, left .5s;
+      left: 0;
+      top: 0;
+      position: absolute;
+      transition: top .5s, left .5s;
     }
   </style>
 </head>
@@ -31,49 +31,61 @@
 
 
   <div id="field">
-    <img src="https://en.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    <img src="https://en.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . .
   </div>
 
   <script>
 
     function handler(e) {
-        const x = e.offsetX;
-        const y = e.offsetY;
+      // get (x, y) coordinates of user click
+      const x = e.offsetX;
+      const y = e.offsetY;
+    
+      const fieldWidth = this.clientWidth;
+      const fieldHeight = this.clientHeight;
+      // to center ball we need to know its size (halves)
+      const ballOffsetX = ball.clientWidth / 2;
+      const ballOffsetY = ball.clientHeight / 2;
 
-        const fieldWidth = this.clientWidth;
-        const fieldHeight = this.clientHeight;
+      // left and right variables that we dynamically set
+      let left = x - ballOffsetX;
+      let top = y - ballOffsetY;
 
-        const ballOffsetX = ball.clientWidth / 2;
-        const ballOffsetY = ball.clientHeight / 2;
+      // get edge points beyond which ball cannot be moved
+      const leftMostPoint = Number(getComputedStyle(field).left[0]);
+      const rightMostPoint = fieldWidth - ball.clientWidth;
+      const bottomMostPoint = Number(getComputedStyle(field).top[0]);
+      const topMostPoint = fieldHeight - ball.clientHeight;
 
-        let left = x - ballOffsetX;
-        let top = y - ballOffsetY;
+      // conditionally check if user click is within field
+      // yes - move ball center exactly where user clicked
+      // no -  stick ball at the edge of field
 
-        const leftMostPoint = Number(getComputedStyle(field).left[0]);
-        const rightMostPoint = fieldWidth - ball.clientWidth;
+      // TODO: IMPROVE those checks if possible; probably won't have time to come back to think of improvement, but in case I do;
+      if (left < leftMostPoint) {
+        left = leftMostPoint;
+      } else if (left > rightMostPoint) {
+        left = rightMostPoint;
+      }
 
-        const bottomMostPoint = Number(getComputedStyle(field).top[0]);
-        const topMostPoint = fieldHeight - ball.clientHeight;
+      if (top < bottomMostPoint) {
+        top = bottomMostPoint;
+      } if (top > topMostPoint) {
+        top = topMostPoint;
+      }
 
-        if (left < leftMostPoint) {
-            left = leftMostPoint;
-        } else if (left > rightMostPoint) {
-            left = rightMostPoint;
-        }
-
-        if (top < bottomMostPoint) {
-            top = bottomMostPoint;
-        } if (top > topMostPoint) {
-            top = topMostPoint;
-        }
-
-        ball.style.left = `${left}px`;
-        ball.style.top = `${top}px`;
-    }   
+      // assign coordinates
+      ball.style.left = `${left}px`;
+      ball.style.top = `${top}px`;
+    }
 
     field.addEventListener('click', handler);
   </script>
 
 </body>
+
 </html>
