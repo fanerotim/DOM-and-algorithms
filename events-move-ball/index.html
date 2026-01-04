@@ -12,7 +12,7 @@
       overflow: hidden;
       cursor: pointer;
       position: relative;
-      transition: top .5s, left .5s;
+      /* transition: top .5s, left .5s; */
     }
 
     #ball {
@@ -39,14 +39,29 @@
         const x = e.offsetX;
         const y = e.offsetY;
 
-        const fieldWidth = this.offsetWidth;
-        const fieldHeight = this.offsetHeight;
+        const fieldWidth = this.clientWidth;
+        const fieldHeight = this.clientHeight;
 
         const ballOffsetX = ball.clientWidth / 2;
         const ballOffsetY = ball.clientHeight / 2;
 
-        ball.style.left = `${x - ballOffsetX}px`;
-        ball.style.top = `${y - ballOffsetY}px`;
+        let left = x - ballOffsetX;
+        let top = y - ballOffsetY;
+
+        if (left < 0) {
+            left = 0;
+        } else if (left > fieldWidth - ball.clientWidth) {
+            left = fieldWidth - ball.clientWidth;
+        }
+
+        if (top < 0) {
+            top = 0;
+        } if (top > fieldHeight - ball.clientHeight) {
+            top = field - ball.clientHeight;
+        }
+
+        ball.style.left = `${left}px`;
+        ball.style.top = `${top}px`;
     }   
 
     field.addEventListener('click', handler);
