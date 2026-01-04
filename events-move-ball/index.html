@@ -50,16 +50,22 @@
         let left = x - ballOffsetX;
         let top = y - ballOffsetY;
 
-        if (left < 0) {
-            left = 0;
-        } else if (left > fieldWidth - ball.clientWidth) {
-            left = fieldWidth - ball.clientWidth;
+        const leftMostPoint = Number(getComputedStyle(field).left[0]);
+        const rightMostPoint = fieldWidth - ball.clientWidth;
+
+        const bottomMostPoint = Number(getComputedStyle(field).top[0]);
+        const topMostPoint = fieldHeight - ball.clientHeight;
+
+        if (left < leftMostPoint) {
+            left = leftMostPoint;
+        } else if (left > rightMostPoint) {
+            left = rightMostPoint;
         }
 
-        if (top < 0) {
-            top = 0;
-        } if (top > fieldHeight - ball.clientHeight) {
-            top = field - ball.clientHeight;
+        if (top < bottomMostPoint) {
+            top = bottomMostPoint;
+        } if (top > topMostPoint) {
+            top = topMostPoint;
         }
 
         ball.style.left = `${left}px`;
