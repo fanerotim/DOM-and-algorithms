@@ -7,6 +7,10 @@
   line-height: 24px;
   color: #444;
   display: block;
+
+  /* my styles */
+  z-index: 200;
+  position: absolute;
 }
 
 .arrow:focus {
@@ -19,12 +23,23 @@
 }
 
 ul {
-  height: 130px;
-  width: 9999px;
-  margin: 0;
+  /* increase height; default was 130px */
+  height: 160px;
+  max-width: 390px;
+  margin: 0 auto;
   padding: 0;
   list-style: none;
   font-size: 0;
+
+  /* my styles */
+  position: relative;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  background-color: rgb(238, 235, 235);
+  border-radius: .5rem;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 ul img {
