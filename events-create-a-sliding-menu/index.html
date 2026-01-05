@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+    <style>
+        .menu-button {
+            cursor: pointer;
+        }
+
+        .open-menu-icon,
+        .close-menu-icon {
+            color: green;
+        }
+
+        .hide {
+            display: none;
+        }
+
+    </style>
+
+    <span class="menu-button">
+        <span class="open-menu-icon">▶</span>
+        <span class="close-menu-icon hide"> ▼</span>
+        Sweeties (click me)!
+    </span>
+    <ul class="hide">
+        <li>Cake</li>
+        <li>Donut</li>
+        <li>Honey</li>
+    </ul>
+
+    <script>
+        const ul = document.querySelector('ul');
+        const menuBtn = document.querySelector('.menu-button');
+        const openMenuIcon = document.querySelector('.open-menu-icon');
+        const closeMenuIcon = document.querySelector('.close-menu-icon');
+
+        function handler() {
+            if (openMenuIcon.className.includes('hide')) {
+                openMenuIcon.classList.remove('hide');
+                closeMenuIcon.classList.add('hide');
+                ul.classList.add('hide');
+            } else {
+                openMenuIcon.classList.add('hide');
+                closeMenuIcon.classList.remove('hide');
+                ul.classList.remove('hide');
+            }
+        }
+
+        menuBtn.addEventListener('click', handler);
+    </script>
+
+</body>
+
+</html>
