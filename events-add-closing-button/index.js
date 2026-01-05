@@ -21,7 +21,6 @@ for (let card of cards) {
     button.style.left = coordinates.right;
     button.style.top = card.clientTop + 'px';
     card.append(button);
-
 }
 
 // helper fn to return coordinates of each element (in our case - each card)
