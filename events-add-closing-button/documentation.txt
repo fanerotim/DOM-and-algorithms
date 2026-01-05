@@ -1,0 +1,6 @@
+Source: https://javascript.info/introduction-browser-events#event-handlers
+
+Add a closing button
+
+There’s a list of messages.
+Use JavaScript to add a closing button to the right-upper corner of each message.
