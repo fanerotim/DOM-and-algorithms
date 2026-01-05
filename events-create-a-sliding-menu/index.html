@@ -41,15 +41,9 @@
         const closeMenuIcon = document.querySelector('.close-menu-icon');
 
         function handler() {
-            if (openMenuIcon.className.includes('hide')) {
-                openMenuIcon.classList.remove('hide');
-                closeMenuIcon.classList.add('hide');
-                ul.classList.add('hide');
-            } else {
-                openMenuIcon.classList.add('hide');
-                closeMenuIcon.classList.remove('hide');
-                ul.classList.remove('hide');
-            }
+            openMenuIcon.classList.toggle('hide');
+            closeMenuIcon.classList.toggle('hide');
+            ul.classList.toggle('hide');
         }
 
         menuBtn.addEventListener('click', handler);
