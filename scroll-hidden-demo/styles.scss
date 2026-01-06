@@ -6,6 +6,7 @@
     padding: 0;
     margin: 2rem auto;
     overflow-y: scroll;
+    overflow-x: hidden !important;
     position: relative;
 }
 
@@ -47,7 +48,7 @@ ul li img {
 
 .modal-wrapper {
     margin: 0;
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: rgba(255, 255, 255, 0.92);
     position: absolute;
     top: 0;
     left: 0;
