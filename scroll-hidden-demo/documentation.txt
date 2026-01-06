@@ -1,0 +1,7 @@
+Problem Description:
+
+When we have a container that holds items with combined height greater than its own by default we get a scrollbar.
+If we then decide to add a delete button to each item and open a modal when user clicks on it, we often want to disable scrolling.
+This introduces a problem whereby the content flicks towards the right as when the scrollbar is removed the total width of the body increases as it consumes the width of the scrollbar
+
+Fix it
