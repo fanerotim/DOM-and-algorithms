@@ -1,0 +1,8 @@
+.hide {
+    display: none
+}
+
+span[data-type="list"]:hover {
+    font-weight: bold;
+    cursor: pointer;
+}

@@ -1,0 +1,8 @@
+Source: https://javascript.info/event-delegation
+
+Tree menu
+Create a tree that shows/hides node children on click (demo provided in the above link)
+
+Requirements:
+Only one event handler (use delegation)
+A click outside the node title (on an empty space) should not do anything.
