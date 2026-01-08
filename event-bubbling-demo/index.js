@@ -3,7 +3,7 @@ const container = document.querySelector('.container');
 const outer = document.querySelector('.outer');
 const inner = document.querySelector('.inner');
 
-container.addEventListener('click', (e) => containerHandler(e));
+container.addEventListener('click', containerHandler);
 
 // e.target changes to the element that was clicked while e.currentTarget is always the same - the element with an event handler
 function containerHandler(e) {
