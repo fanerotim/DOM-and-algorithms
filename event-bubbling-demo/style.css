@@ -1,0 +1,46 @@
+html,
+* {
+    padding: 0;
+    margin: 0;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.heading {
+    margin: 3rem auto;
+    text-align: center;
+    font-weight: bold; 
+}
+
+.container,
+.outer,
+.inner {
+    font-size: 12px;
+}
+
+.container {
+    width: 300px;
+    height: 200px;
+    margin: 2rem;
+    background-color: rgb(167, 94, 5);
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+}
+
+.outer {
+    background-color: white;
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    left: 30;
+}
+
+.inner {
+    background-color: rgb(237, 255, 210);
+    width: 50%;
+    height: 50%;
+    margin: 0 auto;
+    position: absolute;
+    left: 75;
+    top: 50;
+}
