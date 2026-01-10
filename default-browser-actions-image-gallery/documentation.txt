@@ -1,0 +1,8 @@
+Source: https://javascript.info/default-browser-action
+
+Image gallery:
+Create an image gallery where the main image changes by the click on a thumbnail.
+
+Like this: (example provided in the above link);
+
+P.S. Use event delegation.
