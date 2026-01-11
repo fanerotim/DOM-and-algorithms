@@ -1,0 +1,65 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prevent text selection</title>
+</head>
+
+<body>
+
+    <style>
+        #container {
+            width: 400px;
+            margin: 0 auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #author {
+            text-align: center;
+        }
+    </style>
+
+    <div id="container">
+
+        <button id="button" onclick="disableSelection()">Disable text selection</button>
+        
+        <h1 id="author">Kapka Kassabova</h1>
+        <p id="text">
+            It was a soothing monastic monotony, a balm for troubled souls, to know your purpose, follow an itinerary
+            and bring the gang back, tired and satisfied after another day of fulfilling your mission. The days were
+            beads in a rosary that passed through your fingers and you felt their texture and shape. The same, but
+            different.
+
+            Morning prayer: milk the sheep and take the flock to pasture. Midday prayer: pladnina. Evening vespers:
+            bring the flock home, feed the dogs. Have a humble supper, lie on your hard bed, then rise early and morning
+            prayer.
+
+            Drink your coffee, lace up your shoes, strap on your rucksack, take your stick and in sickness and in
+            health, in rain and sunshine, go. The dogs are waiting. The flock is waiting. The hills are waiting. You are
+            needed.
+        </p>
+
+    </div>
+
+    <script>
+        // click handler prevents default behavior on the onmousedown event on text, as it is followed by text selection automatically otherwise
+        function disableSelection() {
+            alert('Text selection disabled!');
+
+            // prevent default behavior to disable text selection
+            text.onmousedown = function(e) {
+                e.preventDefault();
+            }
+        }
+
+        // disable text copying
+        text.oncopy = function(e) {
+            alert('We do not allow text copying!');
+            e.preventDefault();
+        }
+    </script>
+
+</body>
+
+</html>

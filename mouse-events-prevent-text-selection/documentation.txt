@@ -1,0 +1,3 @@
+Demo that shows how we can disable text selection and prevent text copying
+
+Inspired by: https://javascript.info/mouse-events-basics
