@@ -19,8 +19,9 @@
 
     <!-- HIDE IMAGE EXAMPLE -->
     <button onclick="hideImage()">Hide image</button>
+    <button id="nested" onclick="nestedHandler()">Nested custom events</button>
     <img id="image" src="/assets/image.jpg" alt="Paris Olympics 5000m women, final">
-
+    
     <script>
         // if event is bubble is true & default behavior is allowed I will catch the custom event 
         document.addEventListener('snowing', (e) => {
@@ -67,6 +68,30 @@
                 image.hidden = 'true'
             }
         }
+
+        // NESTED EVENTS EXECUTION EXAMPLE
+
+        // create handler for the nested button onclick
+        // and examine execution order
+        const nestedHandler = (e) => {
+            // first executes this line
+            alert('start');
+
+            // then we create and dispatch a custom event
+            // if I move this block below the last alert then its handler will execute last
+            // or we can wrap the dispatch event into a setTimout() with 0 delay to create an async request, which again will change execution order - custom handler executes last
+            const event = new Event('nested', {bubbles: true});
+            nested.dispatchEvent(event);
+
+            // this line executes last
+            alert('end')
+        }
+
+        // we catch the custom event
+        nested.addEventListener('nested', () => {
+            // this line executes before the end of the nestedHandler fn;
+            alert('Nested event executed!')
+        })
 
     </script>
 </body>
