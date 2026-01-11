@@ -8,7 +8,18 @@
 
 <body>
 
+    <style>
+        img {
+            margin-top: 1rem;
+            width: 400px;
+        }
+    </style>
+
     <h1 id="heading">It is snowing!</h1>
+
+    <!-- HIDE IMAGE EXAMPLE -->
+    <button onclick="hideImage()">Hide image</button>
+    <img id="image" src="/assets/image.jpg" alt="Paris Olympics 5000m women, final">
 
     <script>
         // if event is bubble is true & default behavior is allowed I will catch the custom event 
@@ -30,6 +41,33 @@
         // if bubbles is set to true, the event bubbles up. in this case, event handler on document catches it
         const event = new Event('snowing', { bubbles: true, cancelable: true });
         heading.dispatchEvent(event);
+
+        // HIDE IMAGE EXAMPLE
+        // testing preventDefault() to send a signal / data on how to proceeed
+
+        // listen for custom event 
+        image.addEventListener('image', (e) => {
+            // ask user to confirm that they want to hide the image
+            if (!confirm('Hide image?')) {
+                alert('we will not be hiding image');
+                // prevent default means that inside hideImage() hide will be false, sa dispachEvent returns false
+                e.preventDefault();
+            }
+        })
+
+        // when buttons is clicked to hide the image, dispatch a custom event
+        const hideImage = () => {
+            // create a new event and allow it to be prevented with e.preventDefault();
+            const imageEvent = new CustomEvent('image', { cancelable: true })
+            // check if event was cancelled
+            const hide = image.dispatchEvent(imageEvent);
+
+            // if it was not, then we hide the image
+            if (hide) {
+                image.hidden = 'true'
+            }
+        }
+
     </script>
 </body>
 
