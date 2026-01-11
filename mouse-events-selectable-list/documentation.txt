@@ -1,0 +1,14 @@
+Source: https://javascript.info/mouse-events-basics
+
+Selectable list
+
+Create a list where elements are selectable, like in file-managers.
+
+A click on a list element selects only that element (adds the class .selected), deselects all others.
+If a click is made with Ctrl (Cmd for Mac), then the selection is toggled on the element, but other elements are not modified.
+
+The demo: (provided in the link above);
+
+P.S. For this task we can assume that list items are text-only. No nested tags.
+
+P.P.S. Prevent the native browser selection of the text on clicks.
