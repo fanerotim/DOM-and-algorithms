@@ -22,6 +22,11 @@
             // e.stopPropagation();
         })
 
+        // if the event is standard user generated one then e.isTrusted is true. in custom events that prop is false
+        heading.addEventListener('click', (e) => {
+            console.log(e.isTrusted);
+        })
+
         // if bubbles is set to true, the event bubbles up. in this case, event handler on document catches it
         const event = new Event('snowing', { bubbles: true, cancelable: true });
         heading.dispatchEvent(event);
