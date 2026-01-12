@@ -4,53 +4,60 @@
 // with things that you'll need anyway
 class HoverIntent {
 
-  constructor({
-    sensitivity = 0.1, // speed less than 0.1px/ms means "hovering over an element"
-    interval = 100, // measure mouse speed once per 100ms: calculate the distance between previous and next points
-    elem,
-    over,
-    out
-  }) {
-    this.sensitivity = sensitivity;
-    this.interval = interval;
-    this.elem = elem;
-    this.over = over;
-    this.out = out;
+    constructor({
+        sensitivity = 0.1, // speed less than 0.1px/ms means "hovering over an element"
+        interval = 100, // measure mouse speed once per 100ms: calculate the distance between previous and next points
+        intervalId = null,
+        elem,
+        over,
+        out
+    }) {
+        this.sensitivity = sensitivity;
+        this.interval = interval;
+        this.elem = elem;
+        this.over = over;
+        this.out = out;
+        this.intervalId = intervalId;
 
-    // make sure "this" is the object in event handlers.
-    this.onMouseMove = this.onMouseMove.bind(this);
-    this.onMouseOver = this.onMouseOver.bind(this);
-    this.onMouseOut = this.onMouseOut.bind(this);
+        // make sure "this" is the object in event handlers.
+        this.onMouseMove = this.onMouseMove.bind(this);
+        this.onMouseOver = this.onMouseOver.bind(this);
+        this.onMouseOut = this.onMouseOut.bind(this);
 
-    // assign the handlers
-    elem.addEventListener("mouseover", this.onMouseOver);
-    elem.addEventListener("mouseout", this.onMouseOut);
+        // assign the handlers
+        elem.addEventListener("mouseover", this.onMouseOver);
+        elem.addEventListener("mouseout", this.onMouseOut);
 
-    // continue from this point
-    elem.addEventListener("mousemove", this.onMouseMove)
-  }
+        // continue from this point
 
-  onMouseOver(event) {
-    /* ... */
-    // console.log('over', event)
-    this.over();
-  }
+    }
 
-  onMouseOut(event) {
-    /* ... */
-    // console.log('out', event)
-    this.out();
-  }
+    onMouseOver(event) {
+        /* ... */
+        const positionX = event.clientX;
+        const positionY = event.clientY;
 
-  onMouseMove(event) {
-    /* ... */
-    console.log(event);
-  }
+        this.intervalId = setInterval(() => {
+            if (Math.abs(positionX - event.clientX < this.sensitivity) || Math.abs(positionY - event.clientY) < this.sensitivity) {
+                this.over();
+            }
+        }, this.interval)
+    }
+
+    onMouseOut(event) {
+        /* ... */
+        clearInterval(this.intervalId);
+        this.out();
+    }
+
+    onMouseMove(event) {
+        /* ... */
+    }
 
 
-  destroy() {
-    /* your code to "disable" the functionality, remove all handlers */
-    /* it's needed for the tests to work */
-  }
+    destroy() {
+        /* your code to "disable" the functionality, remove all handlers */
+        /* it's needed for the tests to work */
+    }
 
 }
