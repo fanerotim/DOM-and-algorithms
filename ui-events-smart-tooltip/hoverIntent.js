@@ -29,61 +29,70 @@ class HoverIntent {
         elem.addEventListener("mouseout", this.onMouseOut);
 
         // continue from this point
-
     }
 
     onMouseOver(event) {
         /* ... */
-        this.positionX = event.clientX;
-        this.positionY = event.clientY;
-
+        // get cursor coordinates on the x and y axes
+        this.positionX = event.pageX;
+        this.positionY = event.pageY;
+        // get current date
+        this.prevTime = Date.now();
+        // attach event listener on mouse move
         elem.addEventListener('mousemove', this.onMouseMove);
 
-        // when I calculate speed with the below formula, then one of the failing tests passes
-        let speed = 0;
-
-        speed = Math.sqrt(
-            Math.pow(this.positionX - event.clientX, 2) +
-            Math.pow(this.positionY - event.clientY, 2)
-        );
-
-        console.log(speed)
-
+        // create an interval that will be checking coordinates every X amount of time
         this.intervalId = setInterval(() => {
+            // when I calculate speed with the below formula, then one of the failing tests passes
+            let speed;
 
-            // one test was failing due to my calculations below
-
-            // if (
-            //     Math.abs(this.positionX - event.clientX < this.sensitivity) ||
-            //     Math.abs(this.positionY - event.clientY) < this.sensitivity) {
-            //     this.over();
-            // }
-
-            // this is from the formula with speed variable. one test still fails
-            if (speed < this.sensitivity) {
-                this.over();
+            // if mouse has not moved then speed is 0
+            if (!this.lastTime || this.prevTime === this.lastTime) {
+                speed = 0;
+            } else {
+                // calculate cursor speed. formula was provided by source of the challenge
+                speed = Math.sqrt(
+                    Math.pow(this.positionX - this.lastX, 2) +
+                    Math.pow(this.positionY - this.lastY, 2)
+                ) / (this.lastTime - this.prevTime);
             }
-        }, this.intervalId)
+
+            // if speed is slower than our criteria, then show the tooltip. clear interval before that. 
+            if (speed < this.sensitivity) {
+                clearInterval(this.intervalId);
+                this.over();
+            } else {
+                // if mouse movement is fast, then update initial cusor coordinates with the coordinates we have
+                this.positionX = this.lastX;
+                this.positionY = this.lastY;
+                this.prevTime = this.lastTime;
+            }
+        }, this.interval)
     }
 
     onMouseOut(event) {
         /* ... */
+        // clear interval if mouse leaves the box
         clearInterval(this.intervalId);
+        // call handler
         this.out();
     }
 
     onMouseMove(event) {
         /* ... */
-        document.querySelector('#tooltip').hidden = 'true';
+        // on mouse move save x and y curosr coordinates
+        this.lastX = event.pageX;
+        this.lastY = event.pageY;
+        // keep track of date
+        this.lastTime = Date.now();
     }
-
 
     destroy() {
         /* your code to "disable" the functionality, remove all handlers */
         /* it's needed for the tests to work */
-        this.elem.removeEventListener('mousemove', this.onMouseMove);
-        this.elem.removeEventListener('mouseover', this.onMouseOver);
-        this.elem.removeEventListener('mouseout', this.onMouseOut);
+        elem.removeEventListener('mousemove', this.onMouseMove);
+        elem.removeEventListener('mouseover', this.onMouseOver);
+        elem.removeEventListener('mouseout', this.onMouseOut);
     }
 
 }
