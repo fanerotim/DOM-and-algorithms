@@ -27,6 +27,8 @@ class HoverIntent {
         // assign the handlers
         elem.addEventListener("mouseover", this.onMouseOver);
         elem.addEventListener("mouseout", this.onMouseOut);
+        // listen for mouse movement, so we can store last x y coordinates of the cursor in a variables
+        elem.addEventListener('mousemove', this.onMouseMove);
 
         // continue from this point
     }
@@ -38,19 +40,17 @@ class HoverIntent {
         this.positionY = event.pageY;
         // get current date
         this.prevTime = Date.now();
-        // attach event listener on mouse move
-        elem.addEventListener('mousemove', this.onMouseMove);
-
-        // create an interval that will be checking coordinates every X amount of time
+        
+        // create an interval that will be checking coordinates every X amount of time (provided in requirements)
         this.intervalId = setInterval(() => {
-            // when I calculate speed with the below formula, then one of the failing tests passes
+            // initialize a variable where we will store speed value
             let speed;
 
             // if mouse has not moved then speed is 0
             if (!this.lastTime || this.prevTime === this.lastTime) {
                 speed = 0;
             } else {
-                // calculate cursor speed. formula was provided by source of the challenge
+                // calculate cursor speed. formula was provided by source of the challenge (javascript.info)
                 speed = Math.sqrt(
                     Math.pow(this.positionX - this.lastX, 2) +
                     Math.pow(this.positionY - this.lastY, 2)
@@ -83,7 +83,7 @@ class HoverIntent {
         // on mouse move save x and y curosr coordinates
         this.lastX = event.pageX;
         this.lastY = event.pageY;
-        // keep track of date
+        // store current date, so we can compare it with initial date (when cursor entered element on mouseover)
         this.lastTime = Date.now();
     }
 
