@@ -26,15 +26,16 @@
             slider.append(thumb);
 
             // on mouse move update thumb's position on the x axis 
-            slider.onmousemove = function (e) {
+            // listen for mousemove on document as we want to allow user to still use the slider even if after initial mouse press their pointer leaves the container
+            document.onmousemove = function (e) {
                 moveThumb(e.clientX);
             }
         }
 
         // on mouse up, make sure mouse move event handler is cancelled
-        slider.onmouseup = function (e) {
-            console.log('mouseup')
-            slider.onmousemove = null;
+        // listen for mouseup events on document just in case the user's cursor left the container after initial click
+        document.onmouseup = function (e) {
+            document.onmousemove = null;
         }
 
         // helper fn that positions thumb on its parent's (slider) x axis
@@ -52,7 +53,6 @@
             } else {
                 thumb.style.left = pageX - (thumb.offsetWidth * 2) + 'px';
             }
-
         }
     </script>
 
