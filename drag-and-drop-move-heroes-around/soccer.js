@@ -47,15 +47,11 @@ function moveTo(hero, pointX, pointY, offsetX, offsetY) {
 
     // calculate scroll width, so we can find right edge
     const scrollWidth = window.outerWidth - window.innerWidth;
-    const rightEdge = window.innerWidth + scrollWidth;
+    const rightEdge = window.innerWidth - scrollWidth;
 
     // make sure the element does not cross right window edge
-    if (pointX + hero.clientWidth > rightEdge) {
-        left = window.innerWidth - hero.clientWidth - scrollWidth;
-    }
-
-    if (pointY + hero.clientHeight > window.innerHeight) {
-        top = window.innerHeight - hero.clientHeight - scrollWidth;
+    if ((pointX + hero.clientWidth) - offsetX > rightEdge) {
+        return;
     }
     
     // make sure the element being dragged does not cross top edge
