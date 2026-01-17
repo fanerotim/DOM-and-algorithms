@@ -1,5 +1,6 @@
 // attach event listener to body to listen for mousedown events
 document.onmousedown = function (e) {
+    e.preventDefault();
     // check if user clicked on a draggable item
     const isDraggable = e.target.classList.contains('draggable');
 
@@ -19,31 +20,34 @@ document.onmousedown = function (e) {
 
     // update its position to absolute, so we can move it around the window
     hero.style.position = 'absolute';
-    
+
     // make sure it is always on top of other elements
-    hero.style.zIndex = 100;
+    hero.style.zIndex = 1000;
     // append it to body
     document.body.append(hero);
     hero.style.left = e.pageX - offsetX + 'px';
     hero.style.top = e.pageY - offsetY + 'px';
 
     // moveTo(hero, e.clientX, e.clientY);
-    document.onmousemove = function (e) {
-        console.log(e);
-        moveTo(hero, e.pageX, e.pageY, offsetX, offsetY)
+    document.onmousemove = function(e) {
+        moveTo(hero, e.pageX, e.pageY, offsetX, offsetY, e);
     }
 }
 
 // create a helper fn that updates coordinates of draggable items
-function moveTo(hero, pointX, pointY, offsetX, offsetY) {
-
+function moveTo(hero, pointX, pointY, offsetX, offsetY, e) {
+    // initialize left and top variables that we'd be using to upate position of draggable element
     let left = pointX - offsetX;
     let top = pointY - offsetY;
-    
+
+    // positionY is the current location of the cursor on the window. 
+    // my idea is to use it to scroll up / down
+    const positionY = e.clientY - offsetY;
+
     // make sure element being dragged does not cross left edge
     if (left < 0) {
         left = 0;
-    }   
+    }
 
     // calculate scroll width, so we can find right edge
     const scrollWidth = window.outerWidth - window.innerWidth;
@@ -51,20 +55,26 @@ function moveTo(hero, pointX, pointY, offsetX, offsetY) {
 
     // make sure the element does not cross right window edge
     if ((pointX + hero.clientWidth) - offsetX > rightEdge) {
-        return;
+        left = rightEdge - hero.offsetWidth;
     }
-    
+
     // make sure the element being dragged does not cross top edge
     if (top < 0) {
         top = 0;
     }
+
+    // TODOs
+    // - disable scroll right. when element reaches right edge, window should not scroll
+    // - make sure that when element reaches window's top or bottom edge it cannot go beyond that point
+    // console.log(window);
+    // console.log(hero.getBoundingClientRect().bottom);
 
     hero.style.left = left + 'px';
     hero.style.top = top + 'px';
 }
 
 // create event listener for mouseup, so we can remove mousemove handler
-document.onmouseup = function (e) {
+document.onmouseup = function () {
     document.onmousemove = null;
 }
 
