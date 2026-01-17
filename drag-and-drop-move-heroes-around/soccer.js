@@ -44,10 +44,31 @@ function moveTo(hero, pointX, pointY, offsetX, offsetY, e) {
     // my idea is to check if it is less than 0
     const positionY = e.clientY - offsetY;
 
-    // and in that case scroll up by positionY, which is negative value, so scroll is upwards
+    // and in that case scroll up by positionY, which is a negative value, so page scrolling is upwards
     if (positionY < 0) {
         window.scrollBy(0, positionY)
     }
+
+    // logic that handles scrolling down if it is possible
+    // get document
+    const html = document.documentElement;
+    // get window height
+    const height = html.clientHeight;
+    // find a breakpoint which tells us if we scrolled to the bottom of the page;
+    // formula for breakpoint is not perfect, but it works
+    const breakpoint = pointY - offsetY;
+
+    // not perfect, but it works, need to improve formula
+    if (breakpoint >= html.offsetHeight) {
+        return;
+    }
+
+    if (breakpoint > height) {
+        scrollBy(0, breakpoint - height)
+    }
+
+    // console.dir(html);
+    // console.log(height);
 
     // make sure element being dragged does not cross left edge
     if (left < 0) {
