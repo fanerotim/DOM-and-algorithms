@@ -40,9 +40,14 @@ function moveTo(hero, pointX, pointY, offsetX, offsetY, e) {
     let left = pointX - offsetX;
     let top = pointY - offsetY;
 
-    // positionY is the current location of the cursor on the window. 
-    // my idea is to use it to scroll up / down
+    // positionY is the current location of the cursor on the window. offsetY is used, so the top of the element is calculated from the point of the click (in can be in the middle of the element)
+    // my idea is to check if it is less than 0
     const positionY = e.clientY - offsetY;
+
+    // and in that case scroll up by positionY, which is negative value, so scroll is upwards
+    if (positionY < 0) {
+        window.scrollBy(0, positionY)
+    }
 
     // make sure element being dragged does not cross left edge
     if (left < 0) {
