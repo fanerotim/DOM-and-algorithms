@@ -1,0 +1,4 @@
+Demo inspired by: https://javascript.info/pointer-events
+
+Replicating the slider challenge, but with pointer events (instead of mouse)
+Testing the issue of triggering mouseover events on separate elements
