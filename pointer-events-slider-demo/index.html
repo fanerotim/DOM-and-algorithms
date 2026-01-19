@@ -12,9 +12,48 @@
         <div class="thumb"></div>
     </div>
 
+    <h1 id="heading">Hover me and I will turn green!</h1>
+
     <script>
         // ...your code...
-        
+        const thumb = document.querySelector('.thumb');
+
+        thumb.onpointerdown = function(e) {
+            // set pointer capture / bind all pointer events to thumb
+            // with this being configured, the heading's pointer events will not trigger if we hover over it while dragging the thumb
+            // without binding the e.pointerId, then the heading's pointer event triggers: to replicate set 'onpointermove' to body instead: document.body.onpointermove = fn; (instead of setting it on thumb)
+            thumb.setPointerCapture(e.pointerId);
+
+            thumb.onpointermove = function(e) {
+                // get position of the thumb on each pointer move
+                let leftValue = e.clientX - slider.getBoundingClientRect().left;
+                
+                // prevent the thumb from leaving its parent from its left edge
+                if (leftValue < 0) {
+                    leftValue = 0;
+                }
+
+                // prevent thumb from leaving right edge
+                if (leftValue + thumb.offsetWidth > slider.clientWidth) {
+                    leftValue = slider.clientWidth - thumb.offsetWidth;
+                }
+                
+                thumb.style.left = leftValue + 'px';
+            }
+        }
+
+        thumb.onpointerup = function() {
+            thumb.onpointermove = null;
+        }
+
+        // logic for #heading
+        heading.onpointerover = function(e) {
+            heading.style.color = 'green';
+        }
+
+        heading.onpointerout = function(e) {
+            heading.style.color = '';
+        }
     </script>
 
 </body>
