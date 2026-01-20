@@ -1,11 +1,60 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="index.js" async></script>
     <title>Keyboard events: extended hotkeys</title>
 </head>
+
 <body>
-    
+
+    <style>
+        * {
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #description {
+            font-size: 1.7rem;
+            font-weight: bold;
+            text-align: center;
+            width: 90%;
+            margin: 2rem auto;
+        }
+
+        span {
+            font-style: italic;
+            color: rgb(131, 125, 125);
+        }
+
+        #hiddenText {
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+            width: 80%;
+            margin: 0 auto;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .quote {
+            font-weight: 400;
+        }
+
+        .author {
+            font-size: .9rem;
+            color: rgb(116, 116, 116);
+        }
+    </style>
+
+    <h1 id="description">Press <span>i and o</span> simultaneously and a hidden text will show</h1>
+
+    <div id="hiddenText">
+        <h2 class="quote">And above all, watch with glittering eyes the whole world around you because the greatest secrets are always
+            hidden in the most unlikely places. Those who don't believe in magic will never find it.</h2>
+        <h3 class="author">Roald Dahl</h3>
+    </div>
+
 </body>
+
 </html>
