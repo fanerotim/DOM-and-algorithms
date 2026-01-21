@@ -1,16 +1,53 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
 </head>
 
 <body>
 
-<h1>Scroll me</h1>
+    <style>
+        #container {
+            height: 200px;
+            border: 1px solid black;
+            overflow-y: scroll;
+        }
+    </style>
 
-<script>
-  // ... your code ...
-</script>
+    <h1>Scroll me</h1>
+    <div id="container"></div>
+
+    <script>
+        // ... your code ...
+        // add current date to available page height on initial load
+        document.addEventListener('DOMContentLoaded', (e) => {
+            // hardcoded number for initial state
+            appendDate(7);
+        })
+
+        // listen for on scroll events
+        container.onscroll = function (e) {
+            const documentHeight = container.clientHeight;
+            const pageYOffset = container.scrollTop;
+            
+            // if we are 50px from the bottom of the element, add more paragraphs with current date, so height will increase
+            if (pageYOffset + 50 + container.clientHeight >= documentHeight) {
+                appendDate(1);
+            }
+        }
+
+        // utility fn that created and appends paragraphs to the page
+        function appendDate(count) {
+            for (let i = 0; i < count; i++) {
+                const date = new Date();
+                const paragraph = document.createElement('p');
+                paragraph.innerHTML = date;
+                container.append(paragraph);
+            }
+        }
+    </script>
 
 </body>
+
 </html>
