@@ -37,22 +37,47 @@
 
 <body>
 
+    <style>
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .hide {
+            opacity: 0;
+        }
+
+    </style>
+
   <div id="matrix">
     <script>
       for (let i = 0; i < 2000; i++) document.writeln(i)
     </script>
   </div>
 
-  <div id="arrowTop"></div>
+  <div id="arrowTop" class="hide"></div>
 
   <script>
     // ... your code ...
+
     // listen for scroll events
     window.addEventListener('scroll', (e) => scrollHandler(e));
 
     const scrollHandler = (e) => {
-        console.log(e);
+        // get window height and how much the user has scrolled out (if any at all)
+        const windowHeight = document.documentElement.clientHeight;
+        const scrollOffset = document.documentElement.scrollTop;
+        
+        // then add / remove the .hide class in accordance with out condition: when user has scrolled out the full height of the window
+        scrollOffset > windowHeight 
+            ? arrowTop.classList.remove('hide')
+            : arrowTop.classList.add('hide')
     }
+
+    // scroll to top if the user clicks on the arrow up button
+    arrowTop.addEventListener('click', () => {
+        window.scrollTo(0, 0);
+    })
   </script>
 
 </body>
