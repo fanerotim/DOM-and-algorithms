@@ -1,0 +1,40 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add an option to Select</title>
+</head>
+
+<body>
+    <select id="genres">
+        <option value="rock">Rock</option>
+        <option value="blues" selected>Blues</option>
+    </select>
+
+
+    <script>
+        // get all options
+        const options = genres.options;
+        // filter the options and return a new array with an {} that holds value and text
+        const data =
+            Array.from(options)
+                .filter(option => option.selected)
+                .map(option => {
+                    return {
+                        value: option.value,
+                        text: option.text
+                    }
+                });
+
+        // show alert with details of selected option
+        alert(`Value: ${data[0].value}, Text: ${data[0].text}`);
+
+                // create and add an option option: <option value="classic">Classic</option> 
+                // make it selected
+                const newOption = new Option('Classic', 'classic', true, true);
+                genres.add(newOption);
+    </script>
+</body>
+
+</html>
