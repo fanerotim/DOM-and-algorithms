@@ -2,25 +2,25 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <style>
-    #mouse {
-      display: inline-block;
-      cursor: pointer;
-      margin: 0;
-    }
+    <meta charset="utf-8">
+    <style>
+        #mouse {
+            display: inline-block;
+            cursor: pointer;
+            margin: 0;
+        }
 
-    #mouse:focus {
-      outline: 1px dashed black;
-    }
-  </style>
+        #mouse:focus {
+            outline: 1px dashed black;
+        }
+    </style>
 </head>
 
 <body>
 
-  <p>Click on the mouse and move it with arrow keys.</p>
+    <p>Click on the mouse and move it with arrow keys.</p>
 
-  <pre id="mouse">
+    <pre id="mouse">
  _   _
 (q\_/p)
  /. .\
@@ -33,9 +33,40 @@
 </pre>
 
 
-  <script>
-    // ...your code...
-  </script>
+    <script>
+        // ...your code...
+        // position our element (mouse) absolute
+        mouse.style.position = 'absolute';
+        // set tabindex attribute, so the element can be focused
+        mouse.setAttribute('tabindex', 1);
+
+        // listen for onclick events on our mouse
+        mouse.addEventListener('click', (e) => {
+            // focus the mouse
+            mouse.focus();
+        })
+
+        // listen for keydown events, so we can move the mouse
+        mouse.addEventListener('keydown', (e) => {
+
+            const coordinates = mouse.getBoundingClientRect();
+
+            switch (e.code) {
+                case 'ArrowUp':
+                    mouse.style.top = coordinates.top - mouse.clientHeight + 'px';
+                    break;
+                case 'ArrowRight':
+                    mouse.style.left = coordinates.left + mouse.clientWidth + 'px';
+                    break;
+                case 'ArrowDown':
+                    mouse.style.top = coordinates.top + mouse.clientHeight + 'px';
+                    break;
+                case 'ArrowLeft':
+                    mouse.style.left = coordinates.left - mouse.clientWidth + 'px';
+                    break;
+            }
+        })
+    </script>
 
 </body>
 
