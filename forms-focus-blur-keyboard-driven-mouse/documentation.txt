@@ -1,0 +1,10 @@
+Source: https://javascript.info/focus-blur
+
+Keyboard-driven mouse
+
+Focus on the mouse. Then use arrow keys to move it:
+Demo: https://en.js.cx/task/keyboard-mouse/solution/
+
+P.S. Don’t put event handlers anywhere except the #mouse element.
+
+P.P.S. Don’t modify HTML/CSS, the approach should be generic and work with any element.
