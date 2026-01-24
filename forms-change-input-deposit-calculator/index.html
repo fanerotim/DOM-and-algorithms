@@ -80,8 +80,50 @@
   <script>
 
     let form = document.forms.calculator;
-
     // your code
+
+    // store input values in variables and conver value into number
+    let money = Number(form.elements.money.value);
+    let years = Number(form.elements.months.value) / 12;
+    let interest = Number(form.elements.interest.value) / 100;
+
+    // update deposit div with starting number
+    const moneyBefore = document.getElementById('money-before');
+    const moneyAfter = document.getElementById('money-after');
+
+    form.oninput = function(e) {
+
+        switch(e.target.name) {
+            case 'money':
+                money = e.target.value;
+                break;
+            case 'months':
+                years = e.target.value / 12;
+                break;
+            case 'interest':
+                interest = e.target.value / 100;
+                break;
+        }
+        calculateResult();
+    }
+
+    function calculateResult() {
+        // find the result of the deposit; formula provided by source of challenge
+        let result = Math.round(money * (1 + interest) ** years);
+        // update both divs' text
+        moneyAfter.innerHTML = result;
+        moneyBefore.innerHTML = money;
+
+        // get diagram element, so we can update its height
+        const diagramElement = document.getElementById('height-after');
+        // calculate the difference between deposit and result, as it will be used in the diagram
+        const height = result - money;
+        // update diagram height: initial height is 100px, to match the deposit and then add its height / 100 as pixels
+        diagramElement.style.height = 100 + (height / 100) + 'px';
+    }
+    // invoke the function initially, so we can show data on initial load
+    calculateResult();
+    
   </script>
 
 
