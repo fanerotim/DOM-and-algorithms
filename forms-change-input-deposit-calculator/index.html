@@ -84,15 +84,17 @@
 
     // store input values in variables and conver value into number
     let money = Number(form.elements.money.value);
+    // its divided by 12, as we want to know number of years instead of months
     let years = Number(form.elements.months.value) / 12;
+    // divided by 100, as we need a percentage
     let interest = Number(form.elements.interest.value) / 100;
 
-    // update deposit div with starting number
+    // get divs, so we can update their text dynamically
     const moneyBefore = document.getElementById('money-before');
     const moneyAfter = document.getElementById('money-after');
 
+    // attach event listener that updates values on input change
     form.oninput = function(e) {
-
         switch(e.target.name) {
             case 'money':
                 money = e.target.value;
@@ -104,21 +106,22 @@
                 interest = e.target.value / 100;
                 break;
         }
+        // after each input change, call re-calculate result, so we can be sure we are showing accurate data
         calculateResult();
     }
 
     function calculateResult() {
         // find the result of the deposit; formula provided by source of challenge
         let result = Math.round(money * (1 + interest) ** years);
-        // update both divs' text
-        moneyAfter.innerHTML = result;
+        // update both divs' text (deposit and result after interest and length are applied)
         moneyBefore.innerHTML = money;
+        moneyAfter.innerHTML = result;
 
-        // get diagram element, so we can update its height
+        // get result element from the diagram, so we can update its height
         const diagramElement = document.getElementById('height-after');
         // calculate the difference between deposit and result, as it will be used in the diagram
         const height = result - money;
-        // update diagram height: initial height is 100px, to match the deposit and then add its height / 100 as pixels
+        // update diagram height: initial height is 100px, to match the deposit element's height (starting point) and then add the result / 100 as pixels on top of the starting point: 100px;
         diagramElement.style.height = 100 + (height / 100) + 'px';
     }
     // invoke the function initially, so we can show data on initial load
