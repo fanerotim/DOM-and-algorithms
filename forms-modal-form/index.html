@@ -2,23 +2,113 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+    <section id="container">
 
-  <div id="prompt-form-container">
-    <form id="prompt-form">
-      <div id="prompt-message">Enter something...
-        <br>Please..</div>
-      <input name="text" type="text">
-      <input type="submit" value="Ok">
-      <input type="button" name="cancel" value="Cancel">
-    </form>
-  </div>
+        <h1>Click the button below</h1>
+        <button id="show-form-btn">Click to show the form</button>
 
+        <div id="prompt-form-container">
+            <form id="prompt-form">
+                <div id="prompt-message">Enter something...
+                    <br>Please..
+                </div>
+                <input name="text" type="text">
+                <input type="submit" value="Ok">
+                <input type="button" name="cancel" value="Cancel">
+            </form>
+        </div>
+
+    </section>
+
+    <script>
+
+        // hide form
+        const formContainer = document.getElementById('prompt-form-container');
+        formContainer.style.display = 'none';
+
+        // get a reference to show form button
+        const showFormBtn = document.querySelector('#show-form-btn');
+
+        // add event listener to show / hide form button toggler
+        showFormBtn.addEventListener('click', () => {
+            // show form
+            formContainer.style.display = 'block'
+            // disable scroll
+            container.style.overflow = 'hidden'
+            // hide background
+            formContainer.style.backgroundColor = 'rgba(220, 220, 220, .5)';
+            // focus on text input
+            document.querySelector('input[name="text"]').focus();
+            // make sure that when user presses tab, focus moves to next input element inside the form, focus never leaves form
+
+            // create a variable to hold index
+            let index = 0;
+            // if user presses escapate then close modal
+            document.onkeydown = function (e) {
+                e.code === 'Escape' ? alertUser('none') : '';
+                // get input elements
+                const inputElements = document.querySelectorAll('input');
+                
+                // check if user pressed Tab
+                if (e.code === 'Tab') {
+                    // prevent default, so we can only switch between form inputs
+                    e.preventDefault();
+                    // focus on next input
+                    inputElements[index].focus();
+                    // reset index if we focused on the last input, so we can start again
+                    index === 2 ? index = 0 : index++;
+                }
+            }
+        })
+
+        // get a reference to the form, so we can listen for input changes
+        const form = document.forms['prompt-form'];
+
+        form.onsubmit = function (e) {
+            // prevent default behavior, otherwise page refreshes
+            e.preventDefault();
+        }
+
+        // get cancel button
+        const cancelBtn = document.querySelector('input[name="cancel"]');
+
+        // add onclick event listener to cancel btn
+        cancelBtn.onclick = function (e) {
+            // call alert fn
+            alertUser('none')
+        }
+
+        // get ok button
+        const okBtn = form.elements[1];
+
+        // listen for click events on ok button
+        okBtn.onclick = function (e) {
+            // get value of user input
+            const userInput = document.querySelector('input[name="text"]').value;
+            alertUser(userInput);
+        }
+
+        // alert fn
+        function alertUser(input) {
+            //close modal
+            formContainer.style.display = 'none';
+            // allow scrolling again
+            container.style.overflow = '';
+            // show alert
+            alert(`You entered: ${input}`);
+            // reset input after modal closes (make sure it is empty is opened again)
+            document.querySelector('input[name="text"]').value = ''
+            // remove onkeydown listener
+            document.onkeydown = null;
+        }
+
+    </script>
 
 </body>
 
