@@ -51,12 +51,12 @@
             let index = 0;
             // if user presses escapate then close modal
             document.onkeydown = function (e) {
-                e.code === 'Escape' ? alertUser('none') : '';
+                e.code === 'Escape' ? alertUser(null) : '';
                 // get input elements
                 const inputElements = document.querySelectorAll('input');
-                
-                // check if user pressed Tab
-                if (e.code === 'Tab') {
+
+                // check if user pressed Tab or Shift + Tab
+                if (e.code === 'Tab' || (e.code === 'Tab' && e.shiftKey === true)) {
                     // prevent default, so we can only switch between form inputs
                     e.preventDefault();
                     // focus on next input
@@ -81,7 +81,7 @@
         // add onclick event listener to cancel btn
         cancelBtn.onclick = function (e) {
             // call alert fn
-            alertUser('none')
+            alertUser(null)
         }
 
         // get ok button
