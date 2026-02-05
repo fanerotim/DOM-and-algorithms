@@ -1,8 +1,8 @@
-This is a small repository in which I have added my solutions to different DOM-related challenges creatd by: https://javascript.info/
+This is a small repository in which I have added my solutions to different DOM-related challenges created by: https://javascript.info/
 
 The challenges are from section: Browser: Document, Events, Interfaces
 
-Key concepts covered: browser environment, DOM, walking / working with the DOM, obtaining element and window sizes as well as their coordinates - using those coordinates to show error messages or calculate element sizes, events (mouse, pointer, keyboard, scroll, custom events), event delegation, forms and their properties / methods / events. Document and resource loading: DOMContentLoaded event, asyc and defer attributes. 
+Key concepts covered: browser environment, DOM, walking / working with the DOM, obtaining element and window sizes as well as their coordinates - using those coordinates to show error messages or calculate element sizes, events (mouse, pointer, keyboard, scroll, custom events), event delegation, forms and their properties / methods / events. Document and resource loading: DOMContentLoaded event, async and defer attributes. 
 
 Each exercise is in its own directory: some of them have lite-server installed as dependency, but can be started with liveserver too. 
 
