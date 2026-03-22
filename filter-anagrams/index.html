@@ -1,0 +1,35 @@
+<!doctype html>
+<!-- <script src="https://en.js.cx/test/libs.js"></script> -->
+<!-- <script src="test.js"></script> -->
+<script>
+
+  // ...Your code...
+  const aclean = (arr) => {
+    
+    const set = new Set(arr);
+    
+    set.forEach(setWord => {
+
+      arr.forEach(arrWord => {
+        
+        let counter = 0;
+        
+        if (setWord !== arrWord && setWord.length === arrWord.length) {
+          for (let letter of arrWord) {
+            if (setWord.toLowerCase().includes(letter.toLowerCase())) {
+              counter++;
+            }
+          }
+          if (counter === arrWord.length) {
+            set.delete(arrWord);
+            counter = 0;
+          }
+        }
+      })
+      
+    })
+    return Array.from(set);
+  }
+</script>
+
+</html>
